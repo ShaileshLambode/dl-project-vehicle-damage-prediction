@@ -1,4 +1,4 @@
-# DL-PROJECT-VEHICLE-DAMAGE-PREDICTION
+# Vehicle Damage Prediction
 
 \<br\>
 
