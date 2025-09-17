@@ -1,102 +1,176 @@
-# Vehicle Damage Prediction
-
-\<br\>
+# Vehicle Damage Prediction 🚗💥
 
 Transforming Vehicle Damage Assessment with AI Precision
-\<br\>
-This app let's you drag and drop an image of a car and it will tell you what kind of damage it has.
-The model is trained on third quarter front and rare view hence the picture should capture the third quarter front or rare view of a car. 
-\<br\>
-![app](app_screenshot.jpg)
-\<br\>
-### Model Details
-1. Used ResNet50 for transfer learning
-2. Model was trained on around 1700 images with 6 target classes
-   1. Front Normal
-   1. Front Crushed
-   1. Front Breakage
-   1. Rear Normal
-   1. Rear Crushed
-   1. Rear Breakage
-9. The accuracy on the validation set was around 80%
-\<br\>
-Built with the tools and technologies:
-\<br\>
 
------
+---
+
+![App Screenshot](app_screenshot.jpg)
+
+*A drag-and-drop interface to detect vehicle damage using AI. Upload a car image (third‐quarter front or rear view), and get a prediction of the damage type.*
+
+---
 
 ## Table of Contents
 
-  * [Overview]
-  * [Getting Started]
-      * [Prerequisites]
-      * [Installation]
-  * [Usage]
-  * [Testing]
+1. [Overview](#overview)  
+2. [Features](#features)  
+3. [Model Details](#model-details)  
+4. [Getting Started](#getting-started)  
+   - [Prerequisites](#prerequisites)  
+   - [Installation](#installation)  
+5. [Usage](#usage)  
+6. [Evaluation & Results](#evaluation--results)  
+7. [Future Work](#future-work)  
+8. [Folder Structure](#folder-structure)  
+9. [Contributing](#contributing)  
+10. [License](#license)  
 
------
+---
 
 ## Overview
 
-dl-project-vehicle-damage-prediction is an **AI-powered tool** designed to streamline vehicle damage assessment through an intuitive web interface. It leverages a fine-tuned ResNet50 model to classify damage types from uploaded images, enabling quick and accurate inspections.
+*Vehicle Damage Prediction* is an AI‑powered web application designed to streamline damage assessment of vehicles via images. It supports rapid, automated classification of car damage types from images taken from either a **third‑quarter front** or **rear view**, helping with insurance claims, repair estimates, or inspections.
 
-### Why dl-project-vehicle-damage-prediction?
+---
 
-This project simplifies damage detection workflows with features including:
+## Features
 
-  * **Model Integration**: Seamlessly loads and utilizes a trained deep learning model for precise damage classification.
-  * **User Interface**: Facilitates easy image uploads and displays real-time prediction results for quick assessments.
-  * **Environment Consistency**: Uses `requirements.txt` to ensure reliable setup across development environments.
-  * **Focused Detection**: Specializes in third-quarter front and rare view images, addressing specific inspection scenarios.
-  * **Fast Inference**: Supports rapid damage evaluation, ideal for vehicle inspection workflows.
+- **Image Classification**: Detects six kinds of damage/state classes:  
+   1. Front Normal  
+   2. Front Crushed  
+   3. Front Breakage  
+   4. Rear Normal  
+   5. Rear Crushed  
+   6. Rear Breakage  
 
------
+- **User‑Friendly Interface**: Drag & drop image upload for easy use.
+
+- **Fast Inference**: Once loaded, model gives quick predictions.
+
+- **Focused Use Case**: Optimized for third‑quarter front & rear views of cars.
+
+---
+
+## Model Details
+
+- Base architecture: **ResNet50** (transfer learning).  
+- Dataset: ~1,700 images across the 6 classes.  
+- Validation accuracy: **≈ 80%** on held‑out validation set.  
+
+Other model details:
+
+- Loss function used (e.g. Cross‑Entropy)  
+- Training strategy (data augmentation, epochs, optimizer, learning rate)  
+- Any regularization (dropout, weight decay)
+
+---
 
 ## Getting Started
 
 ### Prerequisites
 
-This project requires the following dependencies:
-
-  * Programming Language: **Python**
-  * Package Manager: **Pip**
+- Python 3.7+  
+- `pip` / venv (or other virtual environment tool)  
+- GPU (optional, but helpful for faster training)  
 
 ### Installation
 
-Build dl-project-vehicle-damage-prediction from the source and install dependencies:
+```bash
+# Clone the repo
+git clone https://github.com/ShaileshLambode/dl-project-vehicle-damage-prediction.git
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/ShaileshLambode/dl-project-vehicle-damage-prediction
-    ```
-2.  **Navigate to the project directory:**
-    ```bash
-    cd dl-project-vehicle-damage-prediction
-    ```
-3.  **Install the dependencies:**
-    Using `pip`:
-    ```bash
-    pip install -r requirements.txt
-    ```
+cd dl-project-vehicle-damage-prediction
 
------
+# Set up virtual environment (optional but recommended)
+python3 -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+---
 
 ## Usage
 
-Run the project with:
-Using `pip`:
+1. Ensure that `model` directory contains the trained model file (if not, train following instructions below or load from checkpoint).  
+2. Run the web application:
 
-```bash
-python {entrypoint}
+    ```bash
+    python app.py
+    ```
+
+3. In your browser, go to `http://localhost:5000` (or the port the app uses).  
+4. Upload / drag & drop your car image (third‑quarter front or rear view).  
+5. View the prediction.  
+
+---
+
+## Evaluation & Results
+
+| Metric            | Value       |
+|--------------------|--------------|
+| Validation Accuracy | ~ 80%        |
+| Number of Classes   | 6            |
+| Number of Images    | ~ 1,700      |
+
+- Confusion matrix analysis  
+- Examples of misclassifications  
+- Possible biases (e.g. lighting, angle, quality of image)  
+
+---
+
+## Future Work
+
+- Expand dataset: more images (angles, lighting, damage types)  
+- Add more classes (e.g. side damage, minor scratches)  
+- Improve image preprocessing & augmentation (to handle more real‑world variation)  
+- Explore other architectures (e.g. EfficientNet, DenseNet)  
+- Deploy model as API / container (Docker)  
+- Add more metrics & monitor model drift  
+
+---
+
+## Folder Structure
+
+```
+dl-project-vehicle-damage-prediction/
+├── app.py
+├── model_helper.py
+├── model/
+│   └── [trained model file(s)]
+├── requirements.txt
+├── app_screenshot.jpg
+├── temp_file.jpg
+├── README.md
+└── LICENSE
 ```
 
------
+- `app.py`: main web app to upload images & get predictions  
+- `model_helper.py`: functions to load the model, preprocess image, run prediction  
+- `model/`: stores the trained model files  
+- `requirements.txt`: all Python dependencies  
+- `app_screenshot.jpg`: screenshot for UI reference  
 
-## Testing
+---
 
-dl-project-vehicle-damage-prediction uses the **{test\_framework}** test framework. Run the test suite with:
-Using `pip`:
+## Contributing
 
-```bash
-pytest
-```
+Contributions are welcome! To contribute:
+
+1. Fork the repository  
+2. Create your feature branch (`git checkout -b feature/my-feature`)  
+3. Make your changes & add tests if applicable  
+4. Commit your changes (`git commit -m "Add some feature"`)  
+5. Push to branch (`git push origin feature/my-feature`)  
+6. Open a Pull Request  
+
+Please follow the code style & add clear documentation for new features.
+
+---
+
+## License
+
+This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for details.
+
+---
